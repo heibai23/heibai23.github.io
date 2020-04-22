@@ -86,8 +86,11 @@
 <meta property="og:site_name" content="芒果橙的个人博客">
 <meta property="og:description" content="修改记录 日期：2020-04-21 1.初始内容：大多内容摘自GitHub上开源项目《JavaGuide》，原文链接：https:&#x2F;&#x2F;github.com&#x2F;Snailclimb&#x2F;JavaGuide  Java网络1. 协议 OSI七层模型图解 TCP&#x2F;IP   五层网络体系结构  1.1 应用层 任务：应用进程间的通信和交互的规则。  报文：应用层交互的数据单元  协议  域名系统DNS：域名与">
 <meta property="og:image" content="http://hi.csdn.net/attachment/201201/5/0_1325744597WM32.gi">
+<meta property="og:image" content="https://camo.githubusercontent.com/cf627f637b4c678cd77b815fbea8789dd3158b0c/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d372f2545352539422542452545382541372541332545372542412542462545372541382538422545362542312541302545352541452539452545372538452542302545352538452539462545372539302538362e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/cf627f637b4c678cd77b815fbea8789dd3158b0c/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d372f2545352539422542452545382541372541332545372542412542462545372541382538422545362542312541302545352541452539452545372538452542302545352538452539462545372539302538362e706e67">
+<meta property="og:image" content="https://camo.githubusercontent.com/cf627f637b4c678cd77b815fbea8789dd3158b0c/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d372f2545352539422542452545382541372541332545372542412542462545372541382538422545362542312541302545352541452539452545372538452542302545352538452539462545372539302538362e706e67">
 <meta property="article:published_time" content="2020-04-21T01:23:12.000Z">
-<meta property="article:modified_time" content="2020-04-21T13:31:02.887Z">
+<meta property="article:modified_time" content="2020-04-22T02:40:56.570Z">
 <meta property="article:author" content="MangoCheng">
 <meta property="article:tag" content="java,面试">
 <meta name="twitter:card" content="summary">
@@ -368,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.1k
+                  4.5k
                 </span>
               
 
@@ -384,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  12
+                  18
                 </span>
               
             </div>
@@ -509,7 +512,273 @@
 <li><p>HTTPS： xx   Secure 超文本安全传输协议。利用HTTP通信，用TLS保证安全。 = HTTP + TLS</p>
 </li>
 </ul>
-<h2 id="Java并发"><a href="#Java并发" class="headerlink" title="Java并发"></a>Java并发</h2><h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="一、布隆过滤器"><a href="#一、布隆过滤器" class="headerlink" title="一、布隆过滤器"></a>一、布隆过滤器</h3><h4 id="1-基础信息"><a href="#1-基础信息" class="headerlink" title="1.基础信息"></a>1.基础信息</h4><ul>
+<h2 id="Java并发"><a href="#Java并发" class="headerlink" title="Java并发"></a>Java并发</h2><ul>
+<li>含义：同一时间段，多个任务都在进行</li>
+<li>状态：指定时刻只可能处于其中一个状态<ul>
+<li>NEW<ul>
+<li>RUNNABLE</li>
+<li>BLOCKED</li>
+<li>WAITING</li>
+<li>TIME_WAITING</li>
+<li>TERMINATED</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>进程：系统运行程序的基本单位</li>
+<li>线程：比进程更小的执行单位</li>
+</ol>
+<blockquote>
+<blockquote>
+<p>线程</p>
+</blockquote>
+<ul>
+<li><p>线程死锁：多个线程同时被阻塞</p>
+<ul>
+<li>具备条件：互斥、请求与保持条件、不剥夺条件、循环等待条件、</li>
+</ul>
+</li>
+<li><p>synchronized：被修饰的方法或代码块，在任意时刻只能有一个线程执行</p>
+</li>
+<li><p><a href="https://camo.githubusercontent.com/cf627f637b4c678cd77b815fbea8789dd3158b0c/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d372f2545352539422542452545382541372541332545372542412542462545372541382538422545362542312541302545352541452539452545372538452542302545352538452539462545372539302538362e706e67" target="_blank" rel="noopener">volatile</a>：到主内存中读取变量值（保证变量[可见性][2]）、防止指令重排序</p>
+<p><a href="https://camo.githubusercontent.com/cf627f637b4c678cd77b815fbea8789dd3158b0c/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d372f2545352539422542452545382541372541332545372542412542462545372541382538422545362542312541302545352541452539452545372538452542302545352538452539462545372539302538362e706e67" target="_blank" rel="noopener">1</a>：<a href="https://camo.githubusercontent.com/9944baae059c325540072f4bb365a4d1591474c4/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d362f766f6c6174696c652545352538352542332545392539342541452545352541442539372545372539412538342545352538462541462545382541372538312545362538302541372e706e67" target="_blank" rel="noopener">https://camo.githubusercontent.com/9944baae059c325540072f4bb365a4d1591474c4/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d362f766f6c6174696c652545352538352542332545392539342541452545352541442539372545372539412538342545352538462541462545382541372538312545362538302541372e706e67</a></p>
+<p>[2]：<a href="https://www.cnblogs.com/laifw/p/11440066.html" target="_blank" rel="noopener">https://www.cnblogs.com/laifw/p/11440066.html</a></p>
+</li>
+</ul>
+<ul>
+<li><p>读写锁思想：读读共享、写写互斥、读写互斥、写读互斥</p>
+<ul>
+<li>进一步优化：CopyOnWriteArrayList</li>
+</ul>
+</li>
+<li><p>Runnable 接口：不会返回结果或抛出异常</p>
+</li>
+<li><p>Callable接口：无法计算结果时，抛出异常</p>
+</li>
+</ul>
+<blockquote>
+<p>线程池：线程集合的集中管理容器。池化技术的运用</p>
+</blockquote>
+<ul>
+<li><p>目的：减少资源消耗，提交资源利用</p>
+</li>
+<li><p>使用：推荐使用ThreadPoolExecutor方式</p>
+</li>
+<li><p>调用流程：<img src="https://camo.githubusercontent.com/cf627f637b4c678cd77b815fbea8789dd3158b0c/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d372f2545352539422542452545382541372541332545372542412542462545372541382538422545362542312541302545352541452539452545372538452542302545352538452539462545372539302538362e706e67" alt="流程走向"></p>
+</li>
+</ul>
+<ul>
+<li><p>Executor框架：包括了线程池的管理、线程工厂、队列、拒绝策略</p>
+<ul>
+<li>使用<img src="https://camo.githubusercontent.com/cf627f637b4c678cd77b815fbea8789dd3158b0c/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d372f2545352539422542452545382541372541332545372542412542462545372541382538422545362542312541302545352541452539452545372538452542302545352538452539462545372539302538362e706e67" alt="流程"></li>
+</ul>
+<p>  [2]: <a href="https://camo.githubusercontent.com/00b60348bd119016dd09c1d71d0bf44950172719/68747470733a2f2f696d67636f6e766572742e6373646e696d672e636e2f6148523063446f764c3231354c574a73623263746447387464584e6c4c6d397a6379316a626931695a576c716157356e4c6d467361586c31626d4e7a4c6d4e76625338784f4330314c544d774c7a67304f44497a4d7a4d774c6d70775a773f782d6f73732d70726f636573733d696d6167652f666f726d61742c706e67" target="_blank" rel="noopener">https://camo.githubusercontent.com/00b60348bd119016dd09c1d71d0bf44950172719/68747470733a2f2f696d67636f6e766572742e6373646e696d672e636e2f6148523063446f764c3231354c574a73623263746447387464584e6c4c6d397a6379316a626931695a576c716157356e4c6d467361586c31626d4e7a4c6d4e76625338784f4330314c544d774c7a67304f44497a4d7a4d774c6d70775a773f782d6f73732d70726f636573733d696d6167652f666f726d61742c706e67</a></p>
+</li>
+</ul>
+<blockquote>
+<p>乐观锁和悲观锁</p>
+<ol>
+<li><p>悲观锁：总是假设最坏的情况，拿数据都上锁。<u>synchronized</u></p>
+<ul>
+<li>实现：行、表、读、写锁（传统数据库）</li>
+<li>场景：多写</li>
+</ul>
+</li>
+<li><p>乐观锁：最好的情况，只在更新的时候判断。</p>
+<ul>
+<li><p>场景：多读</p>
+</li>
+<li><p>实现方式：</p>
+<ul>
+<li>版本号机制：数据库version标识，提交版本必须大于记录版本</li>
+<li>CAS算法：无锁，非阻塞</li>
+</ul>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li>ABA问题</li>
+<li>循环时间长、开销大</li>
+<li>只能保证一个共享变量的原子操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>AQS</p>
+<ul>
+<li>作用：构建锁和同步器</li>
+<li>原理：被请求的共享资源空闲，则将当前请求资源的线程设为有效的工作线程，并且将共享资源设置为锁定状态；共享资源被占用，则将线程加入队列，阻塞等待被唤醒。</li>
+<li>资源的共享资源方式<ol>
+<li>Exclusive（独占）<ul>
+<li>公平锁</li>
+<li>非公平锁：两次CAS抢锁</li>
+</ul>
+</li>
+<li>Share（共享）</li>
+<li>Semaphore（信号量）：允许多个线程同时访问<ul>
+<li>公平模式</li>
+<li>非公平模式：抢占式</li>
+</ul>
+</li>
+<li>CountDownLatch（倒计时器）</li>
+<li>CycliBarrier（循环栅栏）</li>
+<li>ReentrantLock</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<h3 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h3></blockquote>
+<blockquote>
+<ol>
+<li><p>基础</p>
+<ul>
+<li><img src="https://camo.githubusercontent.com/cf627f637b4c678cd77b815fbea8789dd3158b0c/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d372f2545352539422542452545382541372541332545372542412542462545372541382538422545362542312541302545352541452539452545372538452542302545352538452539462545372539302538362e706e67" alt="运行时数据区域"></li>
+</ul>
+<p>  <a href="https://camo.githubusercontent.com/cf627f637b4c678cd77b815fbea8789dd3158b0c/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d372f2545352539422542452545382541372541332545372542412542462545372541382538422545362542312541302545352541452539452545372538452542302545352538452539462545372539302538362e706e67" target="_blank" rel="noopener">1</a>:<a href="https://camo.githubusercontent.com/0bcc6c01a919b175827f0d5540aeec115df6c001/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d334a617661e8bf90e8a18ce697b6e695b0e68daee58cbae59f9f4a444b312e382e706e67" target="_blank" rel="noopener">https://camo.githubusercontent.com/0bcc6c01a919b175827f0d5540aeec115df6c001/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d334a617661e8bf90e8a18ce697b6e695b0e68daee58cbae59f9f4a444b312e382e706e67</a></p>
+<ul>
+<li><p>线程私有的：</p>
+<ul>
+<li>程序计数器</li>
+<li>虚拟机栈</li>
+<li>本地方法栈</li>
+</ul>
+</li>
+<li><p>线程共享的：</p>
+<ul>
+<li>堆</li>
+<li>方法区</li>
+<li>直接内存</li>
+</ul>
+</li>
+<li><p>String常量池</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"abc"</span>;  <span class="comment">// 常量池</span></span><br><span class="line">String str = <span class="keyword">new</span> String(<span class="string">"abc"</span>);	<span class="comment">// 堆中新建对象</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>尽量避免多个字符串拼接，否则使用StringBuilder</li>
+</ul>
+</li>
+<li><p>八种基本类型的包装类和常量池</p>
+<ul>
+<li>常量池：<strong>Byte,Short,Integer,Long,Character,Boolean</strong></li>
+<li>非..：<strong>Float、Double</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>垃圾回收</p>
+</li>
+</ol>
+<p>。。。</p>
+<blockquote>
+<h2 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h2><ol>
+<li><strong>基础</strong></li>
+</ol>
+<ul>
+<li>同步：发起一个调用后，被调用者未处理完前，调用不返回</li>
+<li>异步：发起请求后，立刻得到被调用者的回应，但被调者并没有返回结果，此时我们可以处理其他的请求。被调用者通常通过事件、回调等机制通知调用者其返回结果。</li>
+<li>阻塞：发起一个请求，调用者一直等待请求结果返回。当前线程被挂起。</li>
+<li>非阻塞：发起请求，不用等待结果返回。可以先做其他操作。</li>
+</ul>
+<ol start="2">
+<li><strong>BIO</strong>（Blocking）：同步阻塞</li>
+</ol>
+<ol start="3">
+<li><p><strong>NIO</strong>（New）：同步非阻塞</p>
+<ul>
+<li>SocketChannel、ServerSocketChannel 套接字通道，支持阻塞、非阻塞<ul>
+<li>低负载、低并发：使用同步阻塞</li>
+<li>高负载、高并发：非阻塞</li>
+</ul>
+</li>
+<li>核心组件<ul>
+<li>Channel（通道）</li>
+<li>Buffer（缓冲区）</li>
+<li>Selector（选择器）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="4">
+<li><strong>AIO</strong>（Asynchronous I/O）：异步非阻塞</li>
+</ol>
+<ol start="5">
+<li><p><strong><em>I/O</em></strong></p>
+<ol>
+<li>i/o流分类：<ul>
+<li>按流向：输入流、输出流</li>
+<li>按操作单元：字节流、字符流</li>
+<li>按流的角色：节点流、处理流</li>
+</ul>
+</li>
+<li>4个抽象类<ul>
+<li>InputStream：字节输入流—输入流的基类</li>
+<li>Reader：字符输入流—输入流的基类</li>
+<li>OutputStream：字节输出流—输出流的基类</li>
+<li>Writer：字符输出流—输出流的基类</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h3 id="Java8"><a href="#Java8" class="headerlink" title="Java8"></a>Java8</h3><p><strong>1. 特性</strong></p>
+<ul>
+<li><p>接口默认方法（虚拟扩展方法）：可以使用default关键字添加非抽象方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Formula</span></span>&#123;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> a)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">default</span> <span class="keyword">double</span> <span class="title">sqrt</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Math.sqrt(a);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>// TODO 通过匿名内部类方式访问接口<br>    Formula formula = new Formula() {<br>        @Override<br>        public double calculate(int a) {<br>            return sqrt(a * 100);<br>        }<br>    };</p>
+<pre><code>System.out.println(formula.calculate(100));     // 100.0
+System.out.println(formula.sqrt(16));           // 4.0
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 1.1 Lambda表达式</span><br><span class="line"></span><br><span class="line">+ 作用：避免使用庞大的匿名类实现</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;java</span><br><span class="line">&#x2F;&#x2F; java7匿名内部类写法</span><br><span class="line">List&lt;String&gt; names &#x3D; Arrays.asList(&quot;peter&quot;, &quot;anna&quot;, &quot;mike&quot;, &quot;xenia&quot;);</span><br><span class="line"></span><br><span class="line">Collections.sort(names, new Comparator&lt;String&gt;() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public int compare(String a, String b) &#123;</span><br><span class="line">        return b.compareTo(a);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; java8 lambda表达式</span><br><span class="line">Collections.sort(names,(String a, String b)-&gt;&#123;</span><br><span class="line">    return b.compareTo(a);</span><br><span class="line">&#125;);</span><br><span class="line">&#x2F;&#x2F; 更简洁方式</span><br><span class="line">Collections.sort(names,(a, b)-&gt;b.compareTo(a));</span><br><span class="line"></span><br></pre></td></tr></table></figure></code></pre><ul>
+<li><strong>FunctionalInterface</strong>（函数式接口）<ul>
+<li>含义：仅仅只包含一个抽象方法，但可以有多个非抽象方法的接口。加注解编译器会自动识别</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Method and Constructor References</strong>（方法和构造函数引用）<ul>
+<li>关键字：<strong>::</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Person </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    String firstName;</span><br><span class="line">    String lastName;</span><br><span class="line"></span><br><span class="line">    Person() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    Person(String firstName, String lastName) &#123;</span><br><span class="line">        <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line">        <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// factory </span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">PersonFactory</span>&lt;<span class="title">P</span> <span class="keyword">extends</span> <span class="title">Person</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">P <span class="title">create</span><span class="params">(String firstName, String lastName)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// use :: to construct</span></span><br><span class="line">PersonFactory&lt;Person&gt; personFactory = Person::<span class="keyword">new</span>;</span><br><span class="line">Person person = personFactory.create(<span class="string">"Peter"</span>, <span class="string">"Parker"</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Lambda Scopes</strong>（表达式作用域）<ul>
+<li>访问局部变量：只读</li>
+<li>访问字段（类属性）和静态变量：读写</li>
+<li>访问默认接口方法：不可</li>
+</ul>
+</li>
+<li><strong>Built-in Function Interface</strong>（内置函数式接口）<ul>
+<li>Predicates</li>
+<li>Functions</li>
+<li>Suppliers</li>
+<li>Consumers</li>
+<li>Comparators</li>
+</ul>
+</li>
+</ul>
+<p>…</p>
+<pre><code>Date API（日期相关）</code></pre><p><strong>2. forEach</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// forEach</span></span><br><span class="line">names.forEach(name-&gt;&#123;</span><br><span class="line">   sout(name); </span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// Lambda表达式</span></span><br><span class="line">names.forEach(name-&gt;System.out.println(name)):</span><br><span class="line"><span class="comment">// ::关键字 遍历List</span></span><br><span class="line">names.forEach(System.out::println);</span><br><span class="line"><span class="comment">// 遍历Map</span></span><br><span class="line">names.forEach((key,value) -&gt; System.out.println(key + <span class="string">' '</span>+ value));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+</blockquote>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="一、布隆过滤器"><a href="#一、布隆过滤器" class="headerlink" title="一、布隆过滤器"></a>一、布隆过滤器</h3><h4 id="1-基础信息"><a href="#1-基础信息" class="headerlink" title="1.基础信息"></a>1.基础信息</h4><ul>
 <li><p>概念：二进制向量（位数组）和一系列随机映射函数（哈希函数）两部分组成的数据结构。</p>
 </li>
 <li><p>原理：</p>
@@ -887,7 +1156,7 @@ for i in ${array[@]};do echo $i ;done # 遍历数组，数组元素为空，没�
   <p><span>本文标题:</span>Java面试基础-初级</a></p>
   <p><span>文章作者:</span>MangoCheng</a></p>
   <p><span>发布时间:</span>2020年04月21日 - 09:23:12</p>
-  <p><span>最后更新:</span>2020年04月21日 - 21:31:02</p>
+  <p><span>最后更新:</span>2020年04月22日 - 10:40:56</p>
   <p><span>原始链接:</span><a href="/2020/04/21/Java%E9%9D%A2%E8%AF%95%E5%9F%BA%E7%A1%80-%E5%88%9D%E7%BA%A7/" title="Java面试基础-初级">http://mangocheng.com/2020/04/21/Java%E9%9D%A2%E8%AF%95%E5%9F%BA%E7%A1%80-%E5%88%9D%E7%BA%A7/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://mangocheng.com/2020/04/21/Java%E9%9D%A2%E8%AF%95%E5%9F%BA%E7%A1%80-%E5%88%9D%E7%BA%A7/"  aria-label="复制成功！"></i></span>
   </p>
@@ -1121,7 +1390,7 @@ for i in ${array[@]};do echo $i ;done # 遍历数组，数组元素为空，没�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改记录"><span class="nav-text">修改记录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java网络"><span class="nav-text">Java网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-协议"><span class="nav-text">1. 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-应用层"><span class="nav-text">1.1 应用层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-运输层"><span class="nav-text">1.2 运输层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-网络层"><span class="nav-text">1.3 网络层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-数据链路层"><span class="nav-text">1.4 数据链路层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-物理层"><span class="nav-text">1.5 物理层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-三次握手和四次挥手"><span class="nav-text">2. 三次握手和四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-三次握手"><span class="nav-text">2.1 三次握手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-四次挥手"><span class="nav-text">2.2 四次挥手</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-TCP、UDP协议的区别"><span class="nav-text">3. TCP、UDP协议的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-TCP协议如何保证可靠传输"><span class="nav-text">4. TCP协议如何保证可靠传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Cookie和Session"><span class="nav-text">5. Cookie和Session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-SSL和TLS"><span class="nav-text">6. SSL和TLS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-概念"><span class="nav-text">6.1 概念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java并发"><span class="nav-text">Java并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构"><span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、布隆过滤器"><span class="nav-text">一、布隆过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基础信息"><span class="nav-text">1.基础信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Queue队列"><span class="nav-text">二、Queue队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基础信息-1"><span class="nav-text">1.基础信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Set"><span class="nav-text">三、Set</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基础信息-2"><span class="nav-text">1. 基础信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、List"><span class="nav-text">四、List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基础信息-3"><span class="nav-text">1. 基础信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Map"><span class="nav-text">五、Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、Tree"><span class="nav-text">六、Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、图"><span class="nav-text">七、图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-text">算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring"><span class="nav-text">Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、常见问题"><span class="nav-text">一、常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基础信息-4"><span class="nav-text">1. 基础信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-RestController-vs-Controller"><span class="nav-text">2. RestController vs Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Spring-IoC-amp-AOP"><span class="nav-text">3. Spring IoC &amp; AOP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Spring事务管理"><span class="nav-text">4. Spring事务管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Spring单例与线程安全"><span class="nav-text">5. Spring单例与线程安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Spring-MVC"><span class="nav-text">6. Spring MVC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL"><span class="nav-text">MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、基础"><span class="nav-text">一、基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-存储引擎"><span class="nav-text">1. 存储引擎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-字符集和校对规则"><span class="nav-text">2. 字符集和校对规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-索引"><span class="nav-text">3. 索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-事务"><span class="nav-text">4. 事务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-amp-Shell"><span class="nav-text">Linux&amp;Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Linux"><span class="nav-text">一、Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-操作系统"><span class="nav-text">1. 操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Linux文件系统"><span class="nav-text">2. Linux文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-基本命令"><span class="nav-text">2.1 基本命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Shell"><span class="nav-text">二、Shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基础"><span class="nav-text">1. 基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-变量"><span class="nav-text">2. 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-使用自定义变量"><span class="nav-text">1.使用自定义变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-使用字符串-，单引号、双引号皆可"><span class="nav-text">2.使用字符串 ，单引号、双引号皆可</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-字符串拼接：并排即可连接"><span class="nav-text">1.字符串拼接：并排即可连接</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-使用数组"><span class="nav-text">3.使用数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-流程控制"><span class="nav-text">3.流程控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-函数"><span class="nav-text">4.函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改记录"><span class="nav-text">修改记录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java网络"><span class="nav-text">Java网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-协议"><span class="nav-text">1. 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-应用层"><span class="nav-text">1.1 应用层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-运输层"><span class="nav-text">1.2 运输层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-网络层"><span class="nav-text">1.3 网络层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-数据链路层"><span class="nav-text">1.4 数据链路层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-5-物理层"><span class="nav-text">1.5 物理层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-三次握手和四次挥手"><span class="nav-text">2. 三次握手和四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-三次握手"><span class="nav-text">2.1 三次握手</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-四次挥手"><span class="nav-text">2.2 四次挥手</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-TCP、UDP协议的区别"><span class="nav-text">3. TCP、UDP协议的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-TCP协议如何保证可靠传输"><span class="nav-text">4. TCP协议如何保证可靠传输</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Cookie和Session"><span class="nav-text">5. Cookie和Session</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-SSL和TLS"><span class="nav-text">6. SSL和TLS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-概念"><span class="nav-text">6.1 概念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java并发"><span class="nav-text">Java并发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM"><span class="nav-text">JVM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O"><span class="nav-text">I&#x2F;O</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java8"><span class="nav-text">Java8</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构"><span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、布隆过滤器"><span class="nav-text">一、布隆过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基础信息"><span class="nav-text">1.基础信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Queue队列"><span class="nav-text">二、Queue队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基础信息-1"><span class="nav-text">1.基础信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Set"><span class="nav-text">三、Set</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基础信息-2"><span class="nav-text">1. 基础信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、List"><span class="nav-text">四、List</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基础信息-3"><span class="nav-text">1. 基础信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Map"><span class="nav-text">五、Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、Tree"><span class="nav-text">六、Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、图"><span class="nav-text">七、图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法"><span class="nav-text">算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring"><span class="nav-text">Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、常见问题"><span class="nav-text">一、常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基础信息-4"><span class="nav-text">1. 基础信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-RestController-vs-Controller"><span class="nav-text">2. RestController vs Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Spring-IoC-amp-AOP"><span class="nav-text">3. Spring IoC &amp; AOP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Spring事务管理"><span class="nav-text">4. Spring事务管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Spring单例与线程安全"><span class="nav-text">5. Spring单例与线程安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Spring-MVC"><span class="nav-text">6. Spring MVC</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL"><span class="nav-text">MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、基础"><span class="nav-text">一、基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-存储引擎"><span class="nav-text">1. 存储引擎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-字符集和校对规则"><span class="nav-text">2. 字符集和校对规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-索引"><span class="nav-text">3. 索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-事务"><span class="nav-text">4. 事务</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-amp-Shell"><span class="nav-text">Linux&amp;Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Linux"><span class="nav-text">一、Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-操作系统"><span class="nav-text">1. 操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Linux文件系统"><span class="nav-text">2. Linux文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-基本命令"><span class="nav-text">2.1 基本命令</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Shell"><span class="nav-text">二、Shell</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基础"><span class="nav-text">1. 基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-变量"><span class="nav-text">2. 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-使用自定义变量"><span class="nav-text">1.使用自定义变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-使用字符串-，单引号、双引号皆可"><span class="nav-text">2.使用字符串 ，单引号、双引号皆可</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-字符串拼接：并排即可连接"><span class="nav-text">1.字符串拼接：并排即可连接</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-使用数组"><span class="nav-text">3.使用数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-流程控制"><span class="nav-text">3.流程控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-函数"><span class="nav-text">4.函数</span></a></li></ol></div>
             
 
           </div>
@@ -1158,7 +1427,7 @@ for i in ${array[@]};do echo $i ;done # 遍历数组，数组元素为空，没�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">3.3k</span>
+    <span title="Site words total count">4.8k</span>
   
 </div>
 
