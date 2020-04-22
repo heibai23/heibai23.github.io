@@ -224,7 +224,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -410,7 +410,9 @@
           
           修改记录
 日期：2020-04-21
-1.初始内容：大多内容摘自GitHub上开源项目《JavaGuide》，原文链接：https://github.com/Snailclimb/JavaGuide
+
+初始内容：大多内容摘自GitHub上开源项目《JavaGuide》，原文链接：https://github.com/Snailclimb/JavaGuide。图片来源博客等，如侵删。
+
 
 Java网络1. 协议
 OSI七层模型图解
@@ -432,11 +434,8 @@ SMTP协议：支持邮件
 
 
 
-
 1.2 运输层
 任务：向两台主机进程间的通盈提供通用的数据传输服务。应用进程利用该服务传送应用层报文
-协议
-传输控制协议TC
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -603,7 +602,7 @@ SMTP协议：支持邮件
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  171
+                  162
                 </span>
               
 
@@ -648,20 +647,30 @@ SMTP协议：支持邮件
 
 2.本地调试12hexo g  #生成hexo s  #启动本地服务，进行文章预览调试
 
-3.其他命令1hexo n "文章名字"
+3.其他命令12hexo n "文章名字"hexo new page "菜单目录名"
 
 
 
+4.部分组件
+评论：valine
+
+阅读次数：LeanCloud
+
+字数统计：post_wordcount
+
+圆形头像：avatar ，修改主题的该标签css样式
+
+文末版权：点击传送
+
+优化大全：点击传送
+
+站内文章引用：点击传送
+
+命令
+1&#123;% post_link 文章标题 链接名称 %&#125;
 
 
-4.评论valine
-5.阅读次数LeanCloud
-6.阅读时长post_wordcount
-7.圆形头像avatar ，修改主题的该标签css样式
-8.文末版权https://juejin.im/post/5c7dd8675188251b6406e7b5
-9.其他优化https://zhuanlan.zhihu.com/p/33616481
 
-站内文章引
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -947,9 +956,7 @@ More
             
               <div class="site-state-item site-state-posts">
               
-	        console.log("url_for(theme.menu.archives",url_for(theme.menu.archives);
-                console.log('source:<a href="/archives/">');
-		<a href="/archives">
+	       	<a href="/archives">
               
                   <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
@@ -1217,7 +1224,7 @@ More
 
 
 
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
   <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
   
   <script type="text/javascript">
