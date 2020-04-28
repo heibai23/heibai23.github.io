@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<!-- <meta name="baidu-site-verification" content="3O8kemkqi7" /> -->
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_32x32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_16x16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端,Vue," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="工作时接触Vue，边学边用时记下的，如有问题，欢迎留言指出。  一、模板语法1. 数据渲染 获取对象数据 12345678910 &#x2F;&#x2F; html &lt;div id&#x3D;&quot;app&quot;&gt; &amp;#123;&amp;#123; message &amp;#125;&amp;#125; &lt;&#x2F;div&gt; &#x2F;&#x2F; js  var app &#x3D; new Vue(&amp;#123;el : &#39;#app&#39; ,    &#x2F;&#x2F;将DOM元素进行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue基础—使用">
+<meta property="og:url" content="http://mangocheng.com/posts/2ea23b74.html">
+<meta property="og:site_name" content="芒果橙的个人博客">
+<meta property="og:description" content="工作时接触Vue，边学边用时记下的，如有问题，欢迎留言指出。  一、模板语法1. 数据渲染 获取对象数据 12345678910 &#x2F;&#x2F; html &lt;div id&#x3D;&quot;app&quot;&gt; &amp;#123;&amp;#123; message &amp;#125;&amp;#125; &lt;&#x2F;div&gt; &#x2F;&#x2F; js  var app &#x3D; new Vue(&amp;#123;el : &#39;#app&#39; ,    &#x2F;&#x2F;将DOM元素进行">
+<meta property="article:published_time" content="2020-04-28T12:35:46.000Z">
+<meta property="article:modified_time" content="2020-04-28T13:01:33.072Z">
+<meta property="article:author" content="MangoCheng">
+<meta property="article:tag" content="前端,Vue">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://mangocheng.com/posts/2ea23b74.html"/>
+
+
+
+
+
+  <title>Vue基础—使用 | 芒果橙的个人博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">芒果橙的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">技术博客</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://mangocheng.com/posts/2ea23b74.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MangoCheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/MangoCheng2.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒果橙的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Vue基础—使用</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-28T20:35:46+08:00">
+                2020-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/2ea23b74.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/2ea23b74.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/posts/2ea23b74.html" class="leancloud_visitors" data-flag-title="Vue基础—使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>工作时接触Vue，边学边用时记下的，如有问题，欢迎留言指出。</p>
+</blockquote>
+<h2 id="一、模板语法"><a href="#一、模板语法" class="headerlink" title="一、模板语法"></a>一、模板语法</h2><h3 id="1-数据渲染"><a href="#1-数据渲染" class="headerlink" title="1. 数据渲染"></a>1. 数据渲染</h3><ol>
+<li><p>获取对象数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// html</span></span><br><span class="line"> &lt;div id=<span class="string">"app"</span>&gt; &#123;&#123; message &#125;&#125; &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"> /</span><span class="regexp">/ js </span></span><br><span class="line"><span class="regexp"> var app = new Vue(&#123;</span></span><br><span class="line"><span class="regexp">el : '#app' ,    /</span><span class="regexp">/将DOM元素进行绑定</span></span><br><span class="line"><span class="regexp">data : &#123;   		/</span><span class="regexp">/定义数据对象、信息</span></span><br><span class="line"><span class="regexp">	message : 'Hello Vue'</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"> &#125;);</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绑定DOM元素特性：v-bind，可以简写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;span v-bind:title&#x3D;&quot;message&quot;&gt; 鼠标悬停 &lt;&#x2F;span&gt;</span><br><span class="line">&lt;span :title&#x3D;&quot;message&quot;&gt; 鼠标悬停 &lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>条件和循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt; &lt;p v-if&#x3D;&quot;seen&quot; &gt; 看到了 &lt;&#x2F;p&gt; &lt;&#x2F;div&gt;</span><br><span class="line">&lt;div&gt; &lt;ol&gt; &lt;li v-for&#x3D;&quot;temp in arr&quot;&gt;&#123;&#123; temp.content &#125;&#125; &lt;&#x2F;li&gt; &lt;&#x2F;ol&gt; &lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>事件绑定：v-on ，可以简写为@</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;button @click&#x3D;&quot;remove&quot;&gt;移除&lt;&#x2F;button&gt;</span><br><span class="line">&#x2F;&#x2F; 方法</span><br><span class="line">methods:&#123;  </span><br><span class="line">	remove:function()&#123; ... &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>表单双向绑定：v-model（Vue实例中的data与渲染在DOM表单元素【input/textarea/select】上的内容保持一致）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-input v-model&#x3D;&quot;form.title&quot;&gt;&lt;&#x2F;el-input&gt;</span><br><span class="line">&#x2F;&#x2F; data</span><br><span class="line">form:&#123;</span><br><span class="line">	title:&#39;&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果数据赋值，但视图未刷新，可使用$set方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$set(this.obj,&#39;newVar&#39;,&quot;这是属性值&quot;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="2-条件渲染：v-if-v-else-if"><a href="#2-条件渲染：v-if-v-else-if" class="headerlink" title="2.条件渲染：v-if/v-else-if"></a>2.条件渲染：v-if/v-else-if</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div v-if&#x3D;&quot;type&#x3D;&#x3D;&#39;A&#39;&quot;&gt; a&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div v-else-if&#x3D;&quot;type&#x3D;&#x3D;&#39;B&#39;&quot;&gt;b&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div v-else&gt;c&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-列表渲染：v-for"><a href="#3-列表渲染：v-for" class="headerlink" title="3.列表渲染：v-for"></a>3.列表渲染：v-for</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div v-for&#x3D;&quot;(value,key,index) in object&quot;&gt;&#123;&#123; index&#125;&#125;,&#123;&#123;key&#125;&#125;:&#123;&#123;value&#125;&#125;&lt;&#x2F;div&gt;</span><br><span class="line">	</span><br><span class="line">&lt;!-- v-for 和 v-if的结合使用，v-for的优先级高于v-if	--&gt;</span><br><span class="line">&lt;li v-for&#x3D;&quot;todo in todos&quot; v-if&#x3D;&quot;!todo.isCompleted&quot;&gt; &#123;&#123; todo &#125;&#125; &lt;&#x2F;li&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-事件处理：v-on"><a href="#4-事件处理：v-on" class="headerlink" title="4.事件处理：v-on"></a>4.事件处理：v-on</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-tag v-for&#x3D;&quot;item in tags&quot; v-if&#x3D;&quot;tags&quot; class&#x3D;&quot;tag-area_one&quot; closable @close&#x3D;&quot;removeTag(item)&quot;&gt;&#123;&#123;item&#125;&#125;&lt;&#x2F;el-tag&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="二、入门知识点"><a href="#二、入门知识点" class="headerlink" title="二、入门知识点"></a>二、入门知识点</h2><ol>
+<li>router文件夹下index.js配置的是路由访问地址</li>
+<li>需要使用到其他组件时，可通过import方式引入</li>
+<li>export和export default区别</li>
+</ol>
+<ul>
+<li><p>export不限变量数；export default只输出一次</p>
+</li>
+<li><p>export输出的变量需要使用{ }盛放；export default不需要</p>
+</li>
+<li><p>一个js文件可以有多个export，有且只能有一个export default</p>
+</li>
+</ul>
+<ol start="4">
+<li>slot插槽</li>
+</ol>
+<ul>
+<li>插槽是一块模板，对于任何一个组件，模板种类分为非插槽模板和插槽模板。</li>
+<li>非插槽模板：指html模板，如’div/span/ul/table’这些，它们的显示与隐藏以及怎样显示由插件自身控制。</li>
+<li>插槽模板：是slot，它是一个空壳子，显示与隐藏以及最后使用什么样的HTML模板显示由父组件控制，但是插槽显示的位置由子组件自身决定，slot写在组件template的哪块，父组件传过来的模板就显示在哪块。</li>
+</ul>
+<ol>
+<li>一个template下就只能有一个根节点&lt;template&gt;&lt;div&gt;&lt;/div&gt;&lt;/template&gt;</li>
+<li>父子组件相互传值</li>
+</ol>
+<ul>
+<li>父组件向子组件传值：父页面里，在子组件里定义了一个参数名，子组件里需要定义接收的参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 父组件里 --&gt;</span><br><span class="line">&lt;children-componment fatherVar&#x3D;&#39;this is value&#39;&gt;&lt;&#x2F;children-componment&gt;</span><br><span class="line">&lt;!-- 子组件里 Vue文件 --&gt;</span><br><span class="line">props:[&#39;fatherVar&#39;]</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>子组件向父组件传值：子组件里添加父组件方法的定义回调</p>
+<ul>
+<li>子组件使用$emit(“methodName”,params)触发父组件的自定义事件 (“handleClose”, false) –&gt;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;send-back-dialog :showDialog&#x3D;&quot;showSendBackDialog&quot; @handleClose&#x3D;&quot;handleCloseSendBackDialog&quot; @refresh&#x3D;&quot;reload&quot; &gt;&lt;&#x2F;send-back-dialog&gt;</span><br><span class="line">this.$emit(&quot;refresh&quot;);   &lt;!-- reload是父组件方法名称 --&gt;</span><br><span class="line">this.$emit(event:string,...args:any[]); &lt;!-- 可以传递多个参数 --&gt;</span><br></pre></td></tr></table></figure></li>
+<li>在子组件定义的对象，默认值是()=&gt;{}<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">props: &#123;</span><br><span class="line">   	paramObj: &#123;</span><br><span class="line">       	type: Object,</span><br><span class="line">       	default: ()&#x3D;&gt;(&#123;&#125;)</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="7">
+<li><p>对象中添加原型方法，则直接在created上定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.indexOf &#x3D; function(val)&#123;</span><br><span class="line">    for(var i&#x3D;0;i&lt;this.length;i++)&#123;</span><br><span class="line">          if(this[i] &#x3D;&#x3D; val) return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br><span class="line">Array.prototype.remove &#x3D; function(val)&#123;</span><br><span class="line">    var index &#x3D; this.indexOf(val);</span><br><span class="line">    if(index&gt;-1)&#123;</span><br><span class="line">        this.splice(index,1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>刷新页面，重新获取数据：通过路由的显示隐藏</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- App.vue --&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">        &lt;router-view v-if&#x3D;&quot;isRouterAlive&quot;&gt;&lt;&#x2F;router-view&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#39;App&#39;,</span><br><span class="line">  provide ()&#123;</span><br><span class="line">     return &#123;</span><br><span class="line">       reload:this.reload</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  data()&#123;</span><br><span class="line">    return &#123;</span><br><span class="line">       isRouterAlive:true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    reload ()&#123;</span><br><span class="line">       this.isRouterAlive &#x3D; false</span><br><span class="line">       this.$nextTick(function()&#123;</span><br><span class="line">          this.isRouterAlive &#x3D; true</span><br><span class="line">       &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  components:&#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 子页面 --&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">inject:[&#39;reload&#39;],</span><br><span class="line"></span><br><span class="line">methods:&#123;</span><br><span class="line">	clear()&#123;</span><br><span class="line">		this.reload()</span><br><span class="line">	 &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> &lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>来源博客：<a href="https://blog.csdn.net/yufengaotian/article/details/81238792" target="_blank" rel="noopener">https://blog.csdn.net/yufengaotian/article/details/81238792</a></p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h2 id="三、相关知识点"><a href="#三、相关知识点" class="headerlink" title="三、相关知识点"></a>三、相关知识点</h2><h3 id="1-子组件获取父组件值"><a href="#1-子组件获取父组件值" class="headerlink" title="1.子组件获取父组件值"></a>1.子组件获取父组件值</h3><ul>
+<li>在父页面的子组件定义变量后，直接在子页面使用this.$parent.var 即可获取</li>
+<li>在父页面的子组件的prop定义变量，子组件直接使用this.var 即可获取</li>
+</ul>
+<h3 id="2-watch-监听器"><a href="#2-watch-监听器" class="headerlink" title="2.watch-监听器"></a>2.watch-监听器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">	&quot;groupData.qtmc&quot;:function()&#123; &#125;  &#x2F;&#x2F;【对象的属性，需要加&quot;&quot;】  对象-- 			data:function()&#123; </span><br><span class="line">		deep:true,			&#x2F;&#x2F; 深度监听</span><br><span class="line">		handler(newVal,oldVal)&#123;&#125;   &#x2F;&#x2F; 数值改变回调事件</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-删除对象属性"><a href="#3-删除对象属性" class="headerlink" title="3.删除对象属性"></a>3.删除对象属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.detele(this.object,&quot;propertyName&quot;);</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="四、全局引入（main-js"><a href="#四、全局引入（main-js" class="headerlink" title="四、全局引入（main.js)"></a>四、全局引入（main.js)</h2><ol>
+<li>jquery</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> jquery <span class="keyword">from</span> <span class="string">'jquery'</span></span><br><span class="line"><span class="built_in">window</span>.jquery = <span class="built_in">window</span>.$ = jquery</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="五、其他"><a href="#五、其他" class="headerlink" title="五、其他"></a>五、其他</h2><h3 id="1-问题汇总"><a href="#1-问题汇总" class="headerlink" title="1. 问题汇总"></a>1. 问题汇总</h3><ul>
+<li>报警告，直接修改了组件里的属性<br><a href="https://blog.csdn.net/cominglately/article/details/80261511" target="_blank" rel="noopener">点击传送</a></li>
+<li>数据渲染无效<ul>
+<li>赋值时，执行顺序可能不一定符合从上到下。此时使用定时器setTimeout</li>
+<li>Vue中有些组件拿不到，要考虑是否是还未加载的原因</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+	
+	  <div>
+	    
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+        ------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+
+	  </div>
+        
+
+	<div>
+	    
+		
+
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>Vue基础—使用</a></p>
+  <p><span>文章作者:</span>MangoCheng</a></p>
+  <p><span>发布时间:</span>2020年04月28日 - 20:35:46</p>
+  <p><span>最后更新:</span>2020年04月28日 - 21:01:33</p>
+  <p><span>原始链接:</span><a href="/posts/2ea23b74.html" title="Vue基础—使用">http://mangocheng.com/posts/2ea23b74.html</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://mangocheng.com/posts/2ea23b74.html"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+	    
+	</div>
+    
+
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%89%8D%E7%AB%AF-Vue/" rel="tag"><i class="fa fa-tag"></i> 前端,Vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/122ed35.html" rel="next" title="Vue基础—理论">
+                <i class="fa fa-chevron-left"></i> Vue基础—理论
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  <!-- with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)]; -->
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/MangoCheng2.png"
+                alt="MangoCheng" />
+            
+              <p class="site-author-name" itemprop="name">MangoCheng</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+	       	<a href="/archives">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/heibai23" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、模板语法"><span class="nav-text">一、模板语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据渲染"><span class="nav-text">1. 数据渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-条件渲染：v-if-v-else-if"><span class="nav-text">2.条件渲染：v-if&#x2F;v-else-if</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-列表渲染：v-for"><span class="nav-text">3.列表渲染：v-for</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-事件处理：v-on"><span class="nav-text">4.事件处理：v-on</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、入门知识点"><span class="nav-text">二、入门知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、相关知识点"><span class="nav-text">三、相关知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-子组件获取父组件值"><span class="nav-text">1.子组件获取父组件值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-watch-监听器"><span class="nav-text">2.watch-监听器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-删除对象属性"><span class="nav-text">3.删除对象属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、全局引入（main-js"><span class="nav-text">四、全局引入（main.js)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、其他"><span class="nav-text">五、其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-问题汇总"><span class="nav-text">1. 问题汇总</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <!-- 引入js：不算子，访问统计 -->
+
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MangoCheng</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">7.6k</span>
+  
+</div>
+
+<!-- 最下面的文本-驱动
+	
+	  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+	 
+-->
+<!-- 最下面的文本
+
+  <span class="post-meta-divider">|</span>
+
+-->
+
+<!-- 最下面的文本-主题
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+<!-- 最下面的文本
+
+-->
+
+ <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
+  <!-- <script src="//cdn.17shou.vip/www-17shou-vip/valine/av-min.js"></script> -->
+  <!-- <script src="//pirogue.org/js/av-min.js"> --></srcipt>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'vD6yrIUaaFWeAwL2KumXjKb3-gzGzoHsz',
+        appKey: 'd1ueiiMU0V07vyg1v320QQib',
+        placeholder: '~从此刻开始',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+	visitor: true
+    });
+    /*window.AV.init({
+            serverURLs: '//cdn1.lncld.net/static/js/3.0.4/av-min.js',
+            appId: 'vD6yrIUaaFWeAwL2KumXjKb3-gzGzoHsz',
+            appKey: 'd1ueiiMU0V07vyg1v320QQib'
+        });*/
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("vD6yrIUaaFWeAwL2KumXjKb3-gzGzoHsz", "d1ueiiMU0V07vyg1v320QQib");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
