@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://camo.githubusercontent.com/00b60348bd119016dd09c1d71d0bf44950172719/68747470733a2f2f696d67636f6e766572742e6373646e696d672e636e2f6148523063446f764c3231354c574a73623263746447387464584e6c4c6d397a6379316a626931695a576c716157356e4c6d467361586c31626d4e7a4c6d4e76625338784f4330314c544d774c7a67304f44497a4d7a4d774c6d70775a773f782d6f73732d70726f636573733d696d6167652f666f726d61742c706e67">
 <meta property="og:image" content="https://camo.githubusercontent.com/0bcc6c01a919b175827f0d5540aeec115df6c001/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d334a617661e8bf90e8a18ce697b6e695b0e68daee58cbae59f9f4a444b312e382e706e67">
 <meta property="article:published_time" content="2020-04-21T01:23:12.000Z">
-<meta property="article:modified_time" content="2020-05-12T05:58:20.930Z">
+<meta property="article:modified_time" content="2020-05-14T03:34:53.194Z">
 <meta property="article:author" content="MangoCheng">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.3k
+                  5.5k
                 </span>
               
 
@@ -388,7 +388,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  20
+                  21
                 </span>
               
             </div>
@@ -468,10 +468,10 @@
 <h4 id="2-2-四次挥手"><a href="#2-2-四次挥手" class="headerlink" title="2.2 四次挥手"></a>2.2 四次挥手</h4><ul>
 <li>目的：断开两个方向的连接。</li>
 <li>过程<ol>
-<li>客户端：诶，我单方面宣布要与你绝交！</li>
-<li>服务端：好啊，我同意了，你和我绝交了！</li>
-<li>服务端：（好气啊），那谁，我也宣布，我要与你绝交了！</li>
-<li>客户端：哼，我也同意了，你和我绝交了！</li>
+<li>客户端：诶，我宣布要与你绝交！我已经不想跟你说话了，你还有什么话说吗？</li>
+<li>服务端：好啊，我同意了，你和我绝交了！不过我还有几句话要说，你稍等。</li>
+<li>服务端：（好气啊），那谁，我要说的是，我也要与你绝交了！我的话说完了。</li>
+<li>客户端：哼，我也同意了，我们绝交了！再见！</li>
 </ol>
 </li>
 </ul>
@@ -584,18 +584,24 @@
 <ul>
 <li><p>具备条件：互斥、请求与保持条件、不剥夺条件、循环等待条件</p>
 <blockquote>
-<p>互斥：一个资源每次只能被一个进程使用</p>
-<p>请求与保持：一个进程因请求资源而阻塞时，对已获得的资源保持不放</p>
-<p>不剥夺：进程已获得的资源，在末使用完之前，不能强行剥夺</p>
-<p>循环等待：若干进程之间形成一种头尾相接的循环等待资源关系</p>
+<p>互斥：一个资源每次只能被一个进程使用<br>请求与保持：一个进程因请求资源而阻塞时，对已获得的资源保持不放<br>不剥夺：进程已获得的资源，在末使用完之前，不能强行剥夺<br>循环等待：若干进程之间形成一种头尾相接的循环等待资源关系</p>
 </blockquote>
 </li>
-<li><p>synchronized：被修饰的方法或代码块，在任意时刻只能有一个线程执行</p>
+<li><p>例子</p>
+<blockquote>
+<p>两个人A、B各持有一个密码箱a、b，箱子里保存了对方的身份证，现在A、B两个人要拿回自己的身份证，A向B请求拿钥匙开b；B向A请求拿钥匙开a，但双方都怕对方先拿钥匙后反悔，不给自己钥匙，于是便僵持着。</p>
+</blockquote>
 </li>
-<li><p>volatile：到主内存中读取变量值（保证变量可见性）、防止指令重排序<img src="https://camo.githubusercontent.com/9944baae059c325540072f4bb365a4d1591474c4/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d362f766f6c6174696c652545352538352542332545392539342541452545352541442539372545372539412538342545352538462541462545382541372538312545362538302541372e706e67" alt="可见性"></p>
+</ul>
 </li>
-<li><p>更多内容可参考该博客：<a href="https://www.cnblogs.com/zhengbin/p/5654805.html" target="_blank" rel="noopener">点击传送</a></p>
-</li>
+</ul>
+<ul>
+<li><p>解决线程安全</p>
+<ul>
+<li>synchronized：被修饰的方法或代码块，在任意时刻只能有一个线程执行（原子性、可见性）</li>
+<li>volatile：到主内存中读取变量值（保证变量可见性）、防止指令重排序<img src="https://camo.githubusercontent.com/9944baae059c325540072f4bb365a4d1591474c4/68747470733a2f2f6d792d626c6f672d746f2d7573652e6f73732d636e2d6265696a696e672e616c6979756e63732e636f6d2f323031392d362f766f6c6174696c652545352538352542332545392539342541452545352541442539372545372539412538342545352538462541462545382541372538312545362538302541372e706e67" alt="可见性"></li>
+<li>final：常量，不可变，因而是可见的（可见性）</li>
+<li>更多内容可参考该博客：<a href="https://www.cnblogs.com/zhengbin/p/5654805.html" target="_blank" rel="noopener">点击传送</a></li>
 </ul>
 <ul>
 <li><p>读写锁思想：读读共享、写写互斥、读写互斥、写读互斥</p>
@@ -703,14 +709,12 @@
 </li>
 <li><p>线程共享的：</p>
 <ul>
-<li><p>堆</p>
+<li>堆</li>
+<li>直接内存<ul>
+<li>元空间</li>
+</ul>
 </li>
-<li><p>方法区</p>
-</li>
-<li><p>直接内存</p>
-</li>
-<li><p>String常量池</p>
-</li>
+<li>方法区<pre><code>+ 运行时常量池</code></pre></li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"abc"</span>;  <span class="comment">// 常量池</span></span><br><span class="line">String str = <span class="keyword">new</span> String(<span class="string">"abc"</span>);	<span class="comment">// 堆中新建对象</span></span><br></pre></td></tr></table></figure>
 
@@ -763,7 +767,7 @@
 </li>
 <li><p>低负载、低并发：使用同步阻塞</p>
 </li>
-<li><p>高负载、高并发：非阻塞</p>
+<li><p>高负载、高并发：使用同步非阻塞</p>
 </li>
 <li><p>核心组件</p>
 <ul>
@@ -1270,7 +1274,7 @@ for i in ${array[@]};do echo $i ;done # 遍历数组，数组元素为空，没�
   <p><span>本文标题:</span>Java基础-初级</a></p>
   <p><span>文章作者:</span>MangoCheng</a></p>
   <p><span>发布时间:</span>2020年04月21日 - 09:23:12</p>
-  <p><span>最后更新:</span>2020年05月12日 - 13:58:20</p>
+  <p><span>最后更新:</span>2020年05月14日 - 11:34:53</p>
   <p><span>原始链接:</span><a href="/posts/1bef9400.html" title="Java基础-初级">http://mangocheng.com/posts/1bef9400.html</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://mangocheng.com/posts/1bef9400.html"  aria-label="复制成功！"></i></span>
   </p>
@@ -1549,7 +1553,7 @@ for i in ${array[@]};do echo $i ;done # 遍历数组，数组元素为空，没�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">13.5k</span>
+    <span title="Site words total count">13.6k</span>
   
 </div>
 
