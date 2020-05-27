@@ -20,3 +20,4 @@
     + [Sql-Oracle](http://mangocheng.com/posts/e39b2c3f.html)
   + 算法&数据结构&设计模式
     + [算法_初级算法](http://mangocheng.com/posts/c4b69568.html)
+    + [数据结构-基础](http://mangocheng.com/posts/79666db.html)
