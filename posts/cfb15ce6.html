@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<!-- <meta name="baidu-site-verification" content="3O8kemkqi7" /> -->
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_32x32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_16x16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="docker、docker-compose," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、基础参考资料 1. 概念 一个平台，开发者通过容器可用于构建、运行和共享应用。使用容器部署应用统称为容器化。   docker daemon：守护进程，运行在宿主机上  docker client：命令行工具，与docker daemon交互  docker image：镜像，包含需要运行的文件；用来创建container，一个镜像可以运行多个container；镜像通过dockerfile创">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker及docker-compose基础">
+<meta property="og:url" content="http://mangocheng.com/posts/cfb15ce6.html">
+<meta property="og:site_name" content="芒果橙的个人博客">
+<meta property="og:description" content="一、基础参考资料 1. 概念 一个平台，开发者通过容器可用于构建、运行和共享应用。使用容器部署应用统称为容器化。   docker daemon：守护进程，运行在宿主机上  docker client：命令行工具，与docker daemon交互  docker image：镜像，包含需要运行的文件；用来创建container，一个镜像可以运行多个container；镜像通过dockerfile创">
+<meta property="article:published_time" content="2020-09-06T12:32:08.000Z">
+<meta property="article:modified_time" content="2020-09-06T12:32:08.853Z">
+<meta property="article:author" content="MangoCheng">
+<meta property="article:tag" content="docker、docker-compose">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://mangocheng.com/posts/cfb15ce6.html"/>
+
+
+
+
+
+  <title>docker及docker-compose基础 | 芒果橙的个人博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">芒果橙的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">技术博客</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://mangocheng.com/posts/cfb15ce6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MangoCheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/image/MangoCheng2.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芒果橙的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">docker及docker-compose基础</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-06T20:32:08+08:00">
+                2020-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">开发工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/posts/cfb15ce6.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/posts/cfb15ce6.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/posts/cfb15ce6.html" class="leancloud_visitors" data-flag-title="docker及docker-compose基础">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、基础"><a href="#一、基础" class="headerlink" title="一、基础"></a>一、基础</h2><p><a href="https://blog.51cto.com/ityouknow/2083688" target="_blank" rel="noopener">参考资料</a></p>
+<h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h3><blockquote>
+<p>一个平台，开发者通过容器可用于构建、运行和共享应用。使用容器部署应用统称为容器化。</p>
+</blockquote>
+<ul>
+<li><p>docker daemon：守护进程，运行在宿主机上</p>
+</li>
+<li><p>docker client：命令行工具，与docker daemon交互</p>
+</li>
+<li><p>docker image：镜像，包含需要运行的文件；用来创建container，一个镜像可以运行多个container；镜像通过dockerfile创建，也可以从docker hub/registry上下载</p>
+</li>
+<li><p>docker container：容器，docker的运行组件，启动一个镜像就是一个容器；容器是一个隔离环境，多个容器之间不会相互影响</p>
+</li>
+<li><p>docker hub/registry：共享和管理docker镜像，用户可以上传或下载上面的镜像；可以搭建自己私有的docker registry</p>
+</li>
+<li><p>dockerfile：一种被Docker程序解释的脚本，Dockerfile由一条一条的指令组成，每条指令对应Linux下面的一条命令。Docker程序将这些Dockerfile指令翻译真正的Linux命令。</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/690844302df5" target="_blank" rel="noopener">dockerfile资料</a></li>
+</ul>
+</li>
+<li><p>相关知识</p>
+<ul>
+<li>挂载：将容器里的目录与宿主机进行映射；把容器中某目录的数据加载到宿主机的目录<ul>
+<li>-v参数后面接的冒号前面的是宿主机的目录，冒号后面的是容器的挂载目录，程序启动命令是加载容器中的目录，而不是宿主机的目录</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>优势</p>
+<ul>
+<li>灵活</li>
+<li>轻量</li>
+<li>可移植性</li>
+<li>低耦合</li>
+<li>可扩展</li>
+<li>安全</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h4><ul>
+<li><p><a href="https://www.cnblogs.com/ws17345067708/p/10455460.html" target="_blank" rel="noopener">Ubuntu18环境</a></p>
+<ul>
+<li><a href="https://blog.csdn.net/mucaoyx/article/details/100056102" target="_blank" rel="noopener">添加用户权限</a></li>
+<li>设置加速器<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1.vim /etc/docker/daemon.json</span></span><br><span class="line">&#123;"registry-mirrors": ["https://cxuueihg.mirror.aliyuncs.com"]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.systemctl daemon-reload</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.systemctl restart docker</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><a href="https://www.cnblogs.com/qgc1995/archive/2018/08/29/9553572.html" target="_blank" rel="noopener">Centos7环境</a></p>
+</li>
+</ul>
+<ul>
+<li>修改镜像默认存储位置：<ul>
+<li><a href="https://www.cnblogs.com/zmdComeOn/p/11977649.html（备份）" target="_blank" rel="noopener">参考一</a></li>
+<li><a href="https://blog.csdn.net/huangwei2014/article/details/103241018" target="_blank" rel="noopener">参考二</a></li>
+</ul>
+</li>
+<li><a href="https://www.cnblogs.com/yoyoketang/p/11397597.html%20%20http://pypi.douban.com/simple/（使用豆瓣源）" target="_blank" rel="noopener">requirements.txt依赖制作镜像</a></li>
+</ul>
+<h4 id="3-制作过程"><a href="#3-制作过程" class="headerlink" title="3. 制作过程"></a>3. 制作过程</h4><ol>
+<li><p>使用maven打成jar包</p>
+</li>
+<li><p>制作Dockerfile文件</p>
+</li>
+<li><p>二者放在同一个目录，终端编译镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 镜像名字：标签    zuul:v1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> .指定Dockerfile所在目录</span></span><br><span class="line">sudo docker build -t zuul:v1 .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -p标识端口映射： 宿主机端口：容器端口</span></span><br><span class="line">sudo docker run --name zuul -d -p 9020:9020 zuul:v1</span><br><span class="line"><span class="meta">#</span><span class="bash"> -v挂载目录：宿主机目录：容器目录 ；-d 后台运行；-it 交互方式运行（进入容器中）</span></span><br><span class="line"> sudo docker run -dit --name 容器别名 -p 9000:9000 -v /home/dataexa/:/home/dataexa 镜像名字：标签</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h4 id="4-使用示例"><a href="#4-使用示例" class="headerlink" title="4. 使用示例"></a>4. 使用示例</h4><ul>
+<li>安装tomcat<ol>
+<li>查找hub上的镜像：docker search tomcat</li>
+<li>拉取镜像：docker pull tomcat</li>
+<li>启动：docker run tomcat</li>
+</ol>
+</li>
+</ul>
+<h3 id="二、制作Dockerfile"><a href="#二、制作Dockerfile" class="headerlink" title="二、制作Dockerfile"></a>二、制作Dockerfile</h3><h4 id="1-基础知识"><a href="#1-基础知识" class="headerlink" title="1. 基础知识"></a>1. 基础知识</h4><ul>
+<li><p><a href="https://blog.csdn.net/wo18237095579/article/details/80540571" target="_blank" rel="noopener">参考资料</a></p>
+</li>
+<li><p>可以通过指定tag标识版本</p>
+</li>
+</ul>
+<h4 id="2-属性"><a href="#2-属性" class="headerlink" title="2. 属性"></a>2. 属性</h4><ul>
+<li><p>ENTRYPOINT ：配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">"java"</span>,<span class="string">"-Djava.security.egd=file:/dev/./urandom"</span>,<span class="string">"-jar"</span>,<span class="string">"-Xmx1024m"</span>,<span class="string">"-Xms1024m"</span>,<span class="string">"/swapping.jar"</span>]</span></span><br><span class="line"><span class="comment"># -Djava.security.egd=file:/dev/./urandom</span></span><br><span class="line"><span class="comment"># 添加java.security.egd的系统属性指向/dev/urandom，JVM上的随机数与熵池策略</span></span><br><span class="line"><span class="comment"># -D 是新增参数，参数的名字叫 java.security.egd ，参数的值叫 file:/dev/./urandom，是为了解决随机数生成的问题</span></span><br><span class="line"><span class="comment"># 使用不同的配置文件</span></span><br><span class="line"><span class="comment"># "-Dspring.profiles.active=test"</span></span><br><span class="line"><span class="comment"># "--Dspring.config.location=application.yml"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CMD：使用一些特殊的命令，如source</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CMD ["/bin/sh" "-c" "sleep 5; source /data/projects/python/venv/bin/activate &amp;&amp; python ./fate_flow/fate_flow_server.py"]</span><br><span class="line">CMD ["/bin/bash", "-c", "source activate python3.5 &amp;&amp; python tornado_service.py"]</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h4 id="3-搭建本地私有仓库"><a href="#3-搭建本地私有仓库" class="headerlink" title="3. 搭建本地私有仓库"></a>3. 搭建本地私有仓库</h4><ul>
+<li><p><a href="https://www.cnblogs.com/subendong/p/9029495.html" target="_blank" rel="noopener">参考资料</a></p>
+</li>
+<li><p>步骤</p>
+<blockquote>
+<p>服务器：192.168.23.23</p>
+</blockquote>
+<ol>
+<li>docker pull registry</li>
+<li>docker run -d -v /registry:/var/lib/registry -p 5000:5000 –restart=always –privileged=true –name registry registry:latest</li>
+<li>docker tag hello-world:latest 192.168.23.23:5000/hello-world:v1【得在本地（服务器）打标签】<ul>
+<li>源镜像名：标签</li>
+<li>源镜像id localhost/项目名称/镜像名称：标签</li>
+</ul>
+</li>
+<li>docker push localhost:5000/hello-world:v1<ul>
+<li>localhost:5000/test/hello-world:v1<ul>
+<li>test为该镜像的父级</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>curl <a href="http://192.168.23.23:5000/v2/_catalog" target="_blank" rel="noopener">http://192.168.23.23:5000/v2/_catalog</a> ===客户端操作</li>
+<li>curl localhost:5000/v2/hello-world/tags/list ===客户端：获取单个镜像的标签列表</li>
+<li>docker pull 192.168.23.23:5000/python3.5-conda:v2 ===客户端</li>
+</ol>
+</li>
+</ul>
+<h2 id="三、docker-compose"><a href="#三、docker-compose" class="headerlink" title="三、docker-compose"></a>三、docker-compose</h2><h3 id="1-基础"><a href="#1-基础" class="headerlink" title="1. 基础"></a>1. 基础</h3><blockquote>
+<p>docker容器工具，通过yml文件定义多docker容器应用，方便快速启动、停止多个容器。</p>
+<p>限于单台宿主机，如果跨主机管理容器，可用Docker Smarm或流行<strong>K8S</strong></p>
+</blockquote>
+<ul>
+<li><p>概念</p>
+<ul>
+<li>服务：一个应用的容器</li>
+<li>项目：由一组关联的应用容器组成的一个完整业务单元</li>
+</ul>
+</li>
+<li><p>属性包含version、services、networks三大部分</p>
+</li>
+<li><p><a href="https://blog.csdn.net/pushiqiang/article/details/78682323?utm_medium=distribute.pc_aggpage_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-2-78682323.nonecase" target="_blank" rel="noopener">Compose和Docker兼容性</a></p>
+<table>
+<thead>
+<tr>
+<th>compose文件格式版本</th>
+<th>docker版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3.4</td>
+<td>17.09.0+</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1.13.0+</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1.10.0+</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1.9.1.+</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="2-安装-1"><a href="#2-安装-1" class="headerlink" title="2. 安装"></a>2. 安装</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1.下载：其中1.23.1为版本号，可根据需要修改</span></span><br><span class="line">sudo curl -L https://github.com/docker/compose/releases/download/1.23.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.设置可执行</span></span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.查看版本</span></span><br><span class="line">docker-compose -v</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-network"><a href="#3-network" class="headerlink" title="3. network"></a>3. network</h4><ul>
+<li>使用这个相当于自定义，会创建一个网路</li>
+<li>使用的值必须在下方使用map结构创建</li>
+<li>host只能有一个，故不能再定义；bridge可以有多个</li>
+<li>如果要使用host，需要用network_mode</li>
+</ul>
+<h4 id="4-例子"><a href="#4-例子" class="headerlink" title="4. 例子"></a>4. 例子</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意，不可用tab符号作空格</span></span><br><span class="line"><span class="comment"># 版本号</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">"3.1"</span></span><br><span class="line"><span class="comment"># 服务</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="comment"># 服务名</span></span><br><span class="line">  <span class="attr">eureka:</span></span><br><span class="line">    <span class="comment"># 镜像名</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">eureka:1.0</span></span><br><span class="line">    <span class="comment"># 容器名</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">eureka-v1</span></span><br><span class="line">    <span class="comment"># 端口</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"8761:8761"</span></span><br><span class="line">    <span class="comment"># 网络模式</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">"bridge"</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">config:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">config:1.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">config-v1</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">"host"</span></span><br><span class="line">    <span class="comment"># 依赖的服务</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">eureka</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">zuul:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">zuul:1.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">zuul-v1</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">eureka</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">config</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义网络</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="comment"># 默认</span></span><br><span class="line">  <span class="attr">default:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">bridge</span></span><br><span class="line"><span class="comment">#  bridge_net:</span></span><br><span class="line"><span class="comment">#   driver: bridge</span></span><br><span class="line"><span class="comment"># host不可再定义，只能有一个</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="四、Conda环境"><a href="#四、Conda环境" class="headerlink" title="四、Conda环境"></a>四、Conda环境</h3><ul>
+<li>迁移拷贝conda环境<ul>
+<li>找到conda安装目录里的envs文件夹</li>
+<li>将里面的环境拷贝到docker容器相应的文件夹下（conda/miniconda3镜像的位置/usr/local/envs）</li>
+<li>启动该容器，在该容器基础上创建新的镜像</li>
+</ul>
+</li>
+<li>其他方式，未尝试<ul>
+<li><a href="https://neusncp.com/user/blog?id=572" target="_blank" rel="noopener">https://neusncp.com/user/blog?id=572</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="五、常用命令"><a href="#五、常用命令" class="headerlink" title="五、常用命令"></a>五、常用命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看docker信息</span></span><br><span class="line">docker info </span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启docker</span></span><br><span class="line">service restart docker </span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找镜像</span></span><br><span class="line">docker search xxx</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 拉取镜像到本地</span></span><br><span class="line">docker pull xx</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash">查看镜像</span></span><br><span class="line">docker images</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash">删除镜像</span></span><br><span class="line">docker rmi image_id</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 根据容器创建新镜像</span></span><br><span class="line">docker commit 容器名 新镜像名:版本号</span><br><span class="line"><span class="meta">#</span><span class="bash"> 重命名容器</span></span><br><span class="line">docker rename 原容器名  新容器名</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash">给镜像打标签</span></span><br><span class="line">docker tag image_name image_name:tagName</span><br><span class="line">docker tag hello-world hello_world:v1</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 导出镜像</span></span><br><span class="line">docker save -o nginx.tar nginx:lates</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 导入镜像</span></span><br><span class="line">docker load -i nginx.tar</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看启动的容器</span></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 从宿主机拷贝到容器里</span></span><br><span class="line">docker cp 要拷贝的文件路径 容器名：要拷贝到容器里面对应的路径</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除容器</span></span><br><span class="line">docker rm container_id|container_name</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭所有容器</span></span><br><span class="line">docker stop $(docker ps -a | awk '&#123; print $1&#125;' | tail -n +2)</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看容器挂载的目录</span></span><br><span class="line">docker inspect container_name | grep Mounts -A 20</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看docker占用空间</span></span><br><span class="line">docker system df</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看docker容器-正在运行</span></span><br><span class="line">docker exec -it   [eureka容器id]  bash</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line"><span class="meta">#</span><span class="bash"> ==============docker-compose命令===============</span></span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动</span></span><br><span class="line">docker-compose up -d</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动一个其他名称的docker-compose文件</span></span><br><span class="line">docker-compose -f docker-compose-dev.yml up -d</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 停止/启动一个服务</span></span><br><span class="line">docker-compose stop|start service_name</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 更新镜像及容器</span></span><br><span class="line">docker-compose up -d --build</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 验证docker-compose文件是否正确，若正确则不输出</span></span><br><span class="line">sudo docker-compose config -q</span><br><span class="line">  </span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看网络</span></span><br><span class="line">docker network ls</span><br><span class="line">   </span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除网路</span></span><br><span class="line">docker network rm id</span><br><span class="line">   </span><br><span class="line"><span class="meta">#</span><span class="bash"> 激活某个环境conda</span></span><br><span class="line">source activate snowflakes</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 其他：https://www.cnblogs.com/lirunzhou/p/10601247.html</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="六、注意事项"><a href="#六、注意事项" class="headerlink" title="六、注意事项"></a>六、注意事项</h3><ul>
+<li><p>Dockerfile文件，里面的注释# 要单独一行，否则会被当做参数解析</p>
+</li>
+<li><p>SpringCloud微服务体系中，网络模式eureka使用bridge，其他的使用host</p>
+</li>
+<li><p>若后端报错NoRouteToHost，<a href="https://www.cnblogs.com/huangting/p/11984881.html" target="_blank" rel="noopener">关闭防火墙</a></p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br><span class="line">systemctl stop firewalld.service</span><br><span class="line">systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://blog.csdn.net/catoop/article/details/91042007" target="_blank" rel="noopener">容器中使用宿主机的shell命令</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-v /var/run/docker.sock:/var/run/docker.sock </span><br><span class="line">-v /usr/bin/docker:/usr/bin/docker</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置容器内的编码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 先安装相关命令</span></span><br><span class="line">apt-get install locales</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置编码</span></span><br><span class="line">localedef -c -f UTF-8 -i zh_CN zh_CN.utf8</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://blog.csdn.net/weixin_30684743/article/details/97906537?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param" target="_blank" rel="noopener">Dockerfile里执行shell脚本</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 基础镜像</span></span><br><span class="line">FROM java8-python3.5-conda:1.0.0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 拷贝项目文件，执行文件</span></span><br><span class="line">COPY project /code/project</span><br><span class="line">COPY start.sh /code</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置工作目录</span></span><br><span class="line">WORKDIR /code</span><br><span class="line"><span class="meta">#</span><span class="bash"> 处理脚本</span></span><br><span class="line">RUN chmod +x start.sh &amp;&amp; cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime </span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行脚本</span></span><br><span class="line">CMD ["sh","start.sh"]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用Java命令，需要配置在/etc/profile里才行，并且需要刷新环境</p>
+<ul>
+<li><a href="https://blog.csdn.net/jays_/article/details/90638802" target="_blank" rel="noopener">不同环境变量配置区别</a></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决使用 docker build 时 Sending build context to Docker daemon 数据过大的问题</p>
+<ul>
+<li>制作镜像时，会将dockerfile同级目录下（指定的目录）的所有文件发送到docker daemon</li>
+<li>使用 dockerfile 创建镜像时新建目录</li>
+<li><a href="https://www.jianshu.com/p/1138f98c089c" target="_blank" rel="noopener">参考资料</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><a href="https://blog.csdn.net/qq_25112523/article/details/99182722" target="_blank" rel="noopener">使用外部的配置文件</a>：试过，貌似不行</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+	
+	  <div>
+	    
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+        ------ 本文结束<i class="fa fa-paw"></i>感谢您的阅读 ------</div>
+
+	  </div>
+        
+
+	<div>
+	    
+		
+
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>docker及docker-compose基础</a></p>
+  <p><span>文章作者:</span>MangoCheng</a></p>
+  <p><span>发布时间:</span>2020年09月06日 - 20:32:08</p>
+  <p><span>最后更新:</span>2020年09月06日 - 20:32:08</p>
+  <p><span>原始链接:</span><a href="/posts/cfb15ce6.html" title="docker及docker-compose基础">http://mangocheng.com/posts/cfb15ce6.html</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://mangocheng.com/posts/cfb15ce6.html"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+	    
+	</div>
+    
+
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker%E3%80%81docker-compose/" rel="tag"><i class="fa fa-tag"></i> docker、docker-compose</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/aaef87ba.html" rel="next" title="Java深入浅出之反射&集合&可见性&NIO">
+                <i class="fa fa-chevron-left"></i> Java深入浅出之反射&集合&可见性&NIO
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  <!-- with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)]; -->
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/image/MangoCheng2.png"
+                alt="MangoCheng" />
+            
+              <p class="site-author-name" itemprop="name">MangoCheng</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+	       	<a href="/archives">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/heibai23" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_35893033" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-copyright"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基础"><span class="nav-text">一、基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概念"><span class="nav-text">1. 概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-安装"><span class="nav-text">2. 安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-制作过程"><span class="nav-text">3. 制作过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-使用示例"><span class="nav-text">4. 使用示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、制作Dockerfile"><span class="nav-text">二、制作Dockerfile</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-基础知识"><span class="nav-text">1. 基础知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-属性"><span class="nav-text">2. 属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-搭建本地私有仓库"><span class="nav-text">3. 搭建本地私有仓库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、docker-compose"><span class="nav-text">三、docker-compose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基础"><span class="nav-text">1. 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-安装-1"><span class="nav-text">2. 安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-network"><span class="nav-text">3. network</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-例子"><span class="nav-text">4. 例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Conda环境"><span class="nav-text">四、Conda环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、常用命令"><span class="nav-text">五、常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#六、注意事项"><span class="nav-text">六、注意事项</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <!-- 引入js：不算子，访问统计 -->
+
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MangoCheng</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">20.3k</span>
+  
+</div>
+
+<!-- 最下面的文本-驱动
+	
+	  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+	 
+-->
+<!-- 最下面的文本
+
+  <span class="post-meta-divider">|</span>
+
+-->
+
+<!-- 最下面的文本-主题
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+-->
+
+<!-- 最下面的文本
+
+-->
+
+ <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <!-- <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script> -->
+  <!-- <script src="//cdn.17shou.vip/www-17shou-vip/valine/av-min.js"></script> -->
+  <!-- <script src="//pirogue.org/js/av-min.js"> --></srcipt>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'vD6yrIUaaFWeAwL2KumXjKb3-gzGzoHsz',
+        appKey: 'd1ueiiMU0V07vyg1v320QQib',
+        placeholder: '~从此刻开始',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+	visitor: true
+    });
+    /*window.AV.init({
+            serverURLs: '//cdn1.lncld.net/static/js/3.0.4/av-min.js',
+            appId: 'vD6yrIUaaFWeAwL2KumXjKb3-gzGzoHsz',
+            appKey: 'd1ueiiMU0V07vyg1v320QQib'
+        });*/
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("vD6yrIUaaFWeAwL2KumXjKb3-gzGzoHsz", "d1ueiiMU0V07vyg1v320QQib");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
